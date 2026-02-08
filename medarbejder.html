@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medarbejderportal | Proud Cph</title>
+    <meta name="description" content="Intern medarbejderportal til ordreoverblik og mail-udsendelser." />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="sub-hero">
+      <nav class="nav nav-light">
+        <a class="logo" href="index.html">Proud Cph</a>
+        <div class="nav-actions">
+          <a class="nav-link dark" href="shop.html">Shop</a>
+          <a class="nav-link dark" href="funktioner.html">Funktioner</a>
+          <a class="nav-link dark" href="betalinger.html">Betalinger</a>
+          <a class="btn btn-small btn-dark" href="medarbejder.html">Medarbejder</a>
+        </div>
+      </nav>
+      <div class="sub-hero-content">
+        <h1>Medarbejderportal</h1>
+        <p>Log ind for at se ordrer, sende ordremails og få interne mail-notifikationer ved nye ordrer.</p>
+      </div>
+    </header>
+
+    <main class="section split">
+      <section class="card" id="employeeLoginCard">
+        <h2>Login</h2>
+        <form id="employeeLoginForm" class="contact-form" onsubmit="return false;">
+          <input type="email" id="employeeEmail" placeholder="Medarbejder e-mail" required />
+          <input type="password" id="employeePassword" placeholder="Password" required />
+          <button class="btn btn-dark" type="submit">Log ind</button>
+          <p class="status" id="employeeLoginStatus"></p>
+          <p class="muted">Demo-login: staff@proudcph.com / Proud2026!</p>
+        </form>
+      </section>
+
+      <section class="card hidden" id="employeeDashboard">
+        <div class="dashboard-head">
+          <h2>Ordreoversigt</h2>
+          <button class="remove-btn" type="button" id="employeeLogoutBtn">Log ud</button>
+        </div>
+        <div class="table-wrap">
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>Ordre</th>
+                <th>Kunde</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Mail</th>
+              </tr>
+            </thead>
+            <tbody id="employeeOrdersBody"></tbody>
+          </table>
+        </div>
+        
+        <section class="card" id="notifySettingsCard">
+          <h3>Mail-notifikationer</h3>
+          <form id="notifyEmailForm" class="contact-form" onsubmit="return false;">
+            <input type="email" id="notifyEmailInput" placeholder="Notifikationsmail (fx ops@proudcph.com)" required />
+            <button class="btn btn-dark" type="submit">Gem notifikationsmail</button>
+            <p class="status" id="notifyEmailStatus"></p>
+          </form>
+        </section>
+
+        <div class="dashboard-actions">
+          <button class="btn btn-dark" type="button" id="sendAllOrderMailsBtn">Send alle ordremails</button>
+          <p class="status" id="employeeMailStatus"></p>
+        </div>
+        <h3>Mail-log</h3>
+        <ul class="method-list" id="employeeMailLog"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Proud Cph</p>
+      <p class="footer-links">
+        <a href="handelsbetingelser.html">Handelsbetingelser</a>
+        <a href="privatlivspolitik.html">Privatlivspolitik</a>
+        <a href="retur.html">Retur & ombytning</a>
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

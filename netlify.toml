@@ -1,0 +1,65 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/shop"
+  to = "/shop.html"
+  status = 200
+
+[[redirects]]
+  from = "/funktioner"
+  to = "/funktioner.html"
+  status = 200
+
+[[redirects]]
+  from = "/om-os"
+  to = "/om-os.html"
+  status = 200
+
+[[redirects]]
+  from = "/kontakt"
+  to = "/kontakt.html"
+  status = 200
+
+[[redirects]]
+  from = "/betalinger"
+  to = "/betalinger.html"
+  status = 200
+
+[[redirects]]
+  from = "/medarbejder"
+  to = "/medarbejder.html"
+  status = 200
+
+
+[[redirects]]
+  from = "/handelsbetingelser"
+  to = "/handelsbetingelser.html"
+  status = 200
+
+[[redirects]]
+  from = "/privatlivspolitik"
+  to = "/privatlivspolitik.html"
+  status = 200
+
+[[redirects]]
+  from = "/retur"
+  to = "/retur.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
