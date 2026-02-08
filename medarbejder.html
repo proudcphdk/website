@@ -21,7 +21,7 @@
       </nav>
       <div class="sub-hero-content">
         <h1>Medarbejderportal</h1>
-        <p>Log ind for at se ordrer og sende ordremails til kunder.</p>
+        <p>Log ind for at se ordrer, sende ordremails og få interne mail-notifikationer ved nye ordrer.</p>
       </div>
     </header>
 
@@ -56,6 +56,16 @@
             <tbody id="employeeOrdersBody"></tbody>
           </table>
         </div>
+        
+        <section class="card" id="notifySettingsCard">
+          <h3>Mail-notifikationer</h3>
+          <form id="notifyEmailForm" class="contact-form" onsubmit="return false;">
+            <input type="email" id="notifyEmailInput" placeholder="Notifikationsmail (fx ops@proudcph.com)" required />
+            <button class="btn btn-dark" type="submit">Gem notifikationsmail</button>
+            <p class="status" id="notifyEmailStatus"></p>
+          </form>
+        </section>
+
         <div class="dashboard-actions">
           <button class="btn btn-dark" type="button" id="sendAllOrderMailsBtn">Send alle ordremails</button>
           <p class="status" id="employeeMailStatus"></p>

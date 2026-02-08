@@ -2,6 +2,7 @@ const STORAGE_KEY = 'proudcph-payment-methods';
 const EMPLOYEE_AUTH_KEY = 'proudcph-employee-auth';
 const EMPLOYEE_ORDERS_KEY = 'proudcph-orders';
 const EMPLOYEE_MAIL_LOG_KEY = 'proudcph-mail-log';
+const EMPLOYEE_NOTIFY_EMAIL_KEY = 'proudcph-notify-email';
 const DEMO_EMPLOYEE_EMAIL = 'staff@proudcph.com';
 const DEMO_EMPLOYEE_PASSWORD = 'Proud2026!';
 
@@ -27,6 +28,11 @@ const employeeMailLog = document.getElementById('employeeMailLog');
 const employeeMailStatus = document.getElementById('employeeMailStatus');
 const sendAllOrderMailsBtn = document.getElementById('sendAllOrderMailsBtn');
 const employeeLogoutBtn = document.getElementById('employeeLogoutBtn');
+const notifyEmailForm = document.getElementById('notifyEmailForm');
+const notifyEmailInput = document.getElementById('notifyEmailInput');
+const notifyEmailStatus = document.getElementById('notifyEmailStatus');
+const placeDemoOrderBtn = document.getElementById('placeDemoOrderBtn');
+const orderStatus = document.getElementById('orderStatus');
 
 const defaultMethods = ['Visa / Mastercard', 'MobilePay', 'Klarna'];
 const defaultOrders = [
@@ -126,6 +132,54 @@ function setMailLog(entries) {
   localStorage.setItem(EMPLOYEE_MAIL_LOG_KEY, JSON.stringify(entries));
 }
 
+
+function getNotifyEmail() {
+  const stored = localStorage.getItem(EMPLOYEE_NOTIFY_EMAIL_KEY);
+  if (!stored) {
+    localStorage.setItem(EMPLOYEE_NOTIFY_EMAIL_KEY, 'ops@proudcph.com');
+    return 'ops@proudcph.com';
+  }
+  return stored;
+}
+
+function setNotifyEmail(value) {
+  localStorage.setItem(EMPLOYEE_NOTIFY_EMAIL_KEY, value);
+}
+
+function createDemoOrder() {
+  const orders = getOrders();
+  const nextIdNumber = 1000 + orders.length + 1;
+  const newOrder = {
+    id: `PCPH-${nextIdNumber}`,
+    customer: 'Ny kunde',
+    email: 'kunde@example.com',
+    total: '1.299 DKK',
+    status: 'Betalt',
+    emailed: true
+  };
+
+  orders.unshift(newOrder);
+  setOrders(orders);
+  appendMailLog(newOrder);
+
+  const notifyEmail = getNotifyEmail();
+  const log = getMailLog();
+  const timestamp = new Date().toLocaleString('da-DK');
+  log.unshift(`${timestamp} · Intern notifikation sendt til ${notifyEmail} for ${newOrder.id}`);
+  setMailLog(log.slice(0, 20));
+
+  if (orderStatus) {
+    orderStatus.textContent = `Ordre ${newOrder.id} oprettet. Mail sendt til kunde + ${notifyEmail}.`;
+  }
+
+  if (employeeMailStatus && isEmployeeLoggedIn()) {
+    employeeMailStatus.textContent = `Ny ordre ${newOrder.id} notifikation sendt til ${notifyEmail}.`;
+  }
+
+  renderOrders();
+  renderMailLog();
+}
+
 function isEmployeeLoggedIn() {
   return localStorage.getItem(EMPLOYEE_AUTH_KEY) === 'true';
 }
@@ -217,6 +271,7 @@ function updateEmployeeVisibility() {
   if (loggedIn) {
     renderOrders();
     renderMailLog();
+    if (notifyEmailInput) notifyEmailInput.value = getNotifyEmail();
   }
 }
 
@@ -278,6 +333,23 @@ if (employeeLogoutBtn) {
     if (employeeLoginStatus) employeeLoginStatus.textContent = '';
     updateEmployeeVisibility();
   });
+}
+
+
+if (notifyEmailForm && notifyEmailInput) {
+  notifyEmailForm.addEventListener('submit', () => {
+    const value = notifyEmailInput.value.trim().toLowerCase();
+    if (!value.includes('@')) {
+      if (notifyEmailStatus) notifyEmailStatus.textContent = 'Indtast en gyldig e-mail.';
+      return;
+    }
+    setNotifyEmail(value);
+    if (notifyEmailStatus) notifyEmailStatus.textContent = `Gemt: ${value}`;
+  });
+}
+
+if (placeDemoOrderBtn) {
+  placeDemoOrderBtn.addEventListener('click', createDemoOrder);
 }
 
 syncPaymentUI();
