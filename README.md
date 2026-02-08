@@ -16,6 +16,10 @@ Denne hjemmeside er gjort **klar til hosting** som statisk site.
 - `sitemap.xml`
 - `netlify.toml`
 - `vercel.json`
+- `handelsbetingelser.html`
+- `privatlivspolitik.html`
+- `retur.html`
+- `site.webmanifest`
 
 ## Hurtig deploy (uden kodeændringer)
 
@@ -57,5 +61,6 @@ python3 -m http.server 4173
 ## Vigtigt før rigtig lancering
 - Opdatér `sitemap.xml` med dit rigtige domæne.
 - Opdatér `robots.txt` med samme domæne.
+- Tilpas indholdet i `handelsbetingelser.html`, `privatlivspolitik.html` og `retur.html` til jeres juridiske setup.
 - Erstat demo-tekster/produkter med rigtige produkter.
 - Tilføj rigtig checkout/payment backend (nuværende betalingsmodul er frontend-demo via localStorage).

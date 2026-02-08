@@ -26,6 +26,22 @@
   to = "/betalinger.html"
   status = 200
 
+
+[[redirects]]
+  from = "/handelsbetingelser"
+  to = "/handelsbetingelser.html"
+  status = 200
+
+[[redirects]]
+  from = "/privatlivspolitik"
+  to = "/privatlivspolitik.html"
+  status = 200
+
+[[redirects]]
+  from = "/retur"
+  to = "/retur.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
