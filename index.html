@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nordic Wear Commerce</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav">
+        <a class="logo" href="index.html">Nordic Wear</a>
+        <div class="nav-actions">
+          <a class="btn btn-ghost" href="funktioner.html">Funktioner</a>
+          <a class="btn btn-ghost" href="om-os.html">Om os</a>
+          <a class="btn btn-small" href="kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <p class="tag">Webshop-platform til tøjvirksomheder</p>
+        <h1>Byg en stærk modeforretning med en skalerbar webshop.</h1>
+        <p>
+          Nordic Wear Commerce samler salg, lager, fragt og kundeoplevelser i én løsning,
+          så dit team kan arbejde hurtigere og mere effektivt.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="funktioner.html">Se funktioner</a>
+          <button class="btn btn-outline" id="openPopup" type="button">Vis popup-demo</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <h2>Hvorfor vælge Nordic Wear?</h2>
+        <div class="cards">
+          <article class="card"><h3>Fokus på fashion</h3><p>Løsningen er bygget til tøjbrands og deres arbejdsgange.</p></article>
+          <article class="card"><h3>Flersidet website</h3><p>Du får en professionel side med separate sider til indhold og support.</p></article>
+          <article class="card"><h3>Klar til vækst</h3><p>Automatiser opgaver og skab bedre kundeoplevelser i hele købsrejsen.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Nordic Wear Commerce · Bygget til modebranchen</p>
+    </footer>
+
+    <div class="modal" id="promoModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-content">
+        <button class="close" id="closePopup" aria-label="Luk popup">×</button>
+        <p class="modal-tag">Popup-eksempel</p>
+        <h3 id="modalTitle">Få 15% på første ordre</h3>
+        <p>Sådan kan en kampagne-popup se ud for nye besøgende i din tøjwebshop.</p>
+        <button class="btn" id="popupCta" type="button">Aktivér popup-flow</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

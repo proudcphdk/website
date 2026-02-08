@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontakt | Nordic Wear Commerce</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="sub-hero">
+      <nav class="nav nav-light">
+        <a class="logo" href="index.html">Nordic Wear</a>
+        <div class="nav-actions">
+          <a class="btn btn-ghost-dark" href="funktioner.html">Funktioner</a>
+          <a class="btn btn-ghost-dark" href="om-os.html">Om os</a>
+          <a class="btn btn-small btn-primary" href="kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+      <div class="sub-hero-content">
+        <h1>Kontakt os for en gratis demo</h1>
+        <p>Vi viser hvordan I kan effektivisere drift, øge salg og forbedre kundeoplevelsen.</p>
+      </div>
+    </header>
+
+    <main class="section alt">
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" id="name" placeholder="Virksomhedsnavn" required />
+        <input type="email" id="email" placeholder="Arbejdsmail" required />
+        <textarea id="message" rows="5" placeholder="Fortæl os om jeres webshop"></textarea>
+        <button class="btn btn-primary" type="submit" id="sendBtn">Send forespørgsel</button>
+        <p class="status" id="status"></p>
+      </form>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Nordic Wear Commerce</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
