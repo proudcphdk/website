@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/shop", "destination": "/shop.html" },
+    { "source": "/funktioner", "destination": "/funktioner.html" },
+    { "source": "/om-os", "destination": "/om-os.html" },
+    { "source": "/kontakt", "destination": "/kontakt.html" },
+    { "source": "/betalinger", "destination": "/betalinger.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
