@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Betalingsmetoder | Proud Cph</title>
+    <meta name="description" content="Administrér betalingsmetoder for Proud Cph checkout." />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="sub-hero">
+      <nav class="nav nav-light">
+        <a class="logo" href="index.html">Proud Cph</a>
+        <div class="nav-actions">
+          <a class="nav-link dark" href="shop.html">Shop</a>
+          <a class="nav-link dark" href="funktioner.html">Funktioner</a>
+          <a class="nav-link dark" href="om-os.html">Brand</a>
+          <a class="nav-link dark" href="medarbejder.html">Medarbejder</a>
+          <a class="btn btn-small btn-dark" href="kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+      <div class="sub-hero-content">
+        <h1>Administrér betalingsmetoder</h1>
+        <p>Tilføj betalingsmetoder som vises direkte i checkout.</p>
+      </div>
+    </header>
+
+    <main class="section split">
+      <section class="card">
+        <h2>Tilføj metode</h2>
+        <form id="paymentForm" class="contact-form" onsubmit="return false;">
+          <input id="paymentName" type="text" placeholder="Fx MobilePay" required />
+          <button id="addPaymentBtn" class="btn btn-dark" type="submit">Tilføj betalingsmetode</button>
+          <p class="status" id="paymentStatus"></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Aktive metoder</h2>
+        <ul id="paymentMethodsAdmin" class="method-list"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Proud Cph</p>
+      <p class="footer-links">
+        <a href="handelsbetingelser.html">Handelsbetingelser</a>
+        <a href="privatlivspolitik.html">Privatlivspolitik</a>
+        <a href="retur.html">Retur & ombytning</a>
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
