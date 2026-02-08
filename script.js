@@ -1,4 +1,10 @@
 const STORAGE_KEY = 'proudcph-payment-methods';
+const EMPLOYEE_AUTH_KEY = 'proudcph-employee-auth';
+const EMPLOYEE_ORDERS_KEY = 'proudcph-orders';
+const EMPLOYEE_MAIL_LOG_KEY = 'proudcph-mail-log';
+const DEMO_EMPLOYEE_EMAIL = 'staff@proudcph.com';
+const DEMO_EMPLOYEE_PASSWORD = 'Proud2026!';
+
 const yearElements = document.querySelectorAll('#year');
 const statusElement = document.getElementById('status');
 const sendButton = document.getElementById('sendBtn');
@@ -6,12 +12,37 @@ const sendButton = document.getElementById('sendBtn');
 const paymentForm = document.getElementById('paymentForm');
 const paymentNameInput = document.getElementById('paymentName');
 const paymentStatus = document.getElementById('paymentStatus');
-
 const adminList = document.getElementById('paymentMethodsAdmin');
 const checkoutList = document.getElementById('paymentMethodsCheckout');
 const previewList = document.getElementById('paymentMethodsPreview');
 
+const employeeLoginCard = document.getElementById('employeeLoginCard');
+const employeeDashboard = document.getElementById('employeeDashboard');
+const employeeLoginForm = document.getElementById('employeeLoginForm');
+const employeeEmail = document.getElementById('employeeEmail');
+const employeePassword = document.getElementById('employeePassword');
+const employeeLoginStatus = document.getElementById('employeeLoginStatus');
+const employeeOrdersBody = document.getElementById('employeeOrdersBody');
+const employeeMailLog = document.getElementById('employeeMailLog');
+const employeeMailStatus = document.getElementById('employeeMailStatus');
+const sendAllOrderMailsBtn = document.getElementById('sendAllOrderMailsBtn');
+const employeeLogoutBtn = document.getElementById('employeeLogoutBtn');
+
 const defaultMethods = ['Visa / Mastercard', 'MobilePay', 'Klarna'];
+const defaultOrders = [
+  { id: 'PCPH-1001', customer: 'Nadia Jensen', email: 'nadia@example.com', total: '1.699 DKK', status: 'Betalt', emailed: false },
+  { id: 'PCPH-1002', customer: 'Jonas Madsen', email: 'jonas@example.com', total: '2.198 DKK', status: 'Pakker', emailed: false },
+  { id: 'PCPH-1003', customer: 'Lina Sørensen', email: 'lina@example.com', total: '499 DKK', status: 'Afsendt', emailed: true }
+];
+
+function safeParse(value, fallback) {
+  try {
+    const parsed = JSON.parse(value);
+    return parsed ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
 
 function getStoredMethods() {
   const stored = localStorage.getItem(STORAGE_KEY);
@@ -19,13 +50,8 @@ function getStoredMethods() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultMethods));
     return [...defaultMethods];
   }
-
-  try {
-    const methods = JSON.parse(stored);
-    return Array.isArray(methods) ? methods : [...defaultMethods];
-  } catch {
-    return [...defaultMethods];
-  }
+  const methods = safeParse(stored, defaultMethods);
+  return Array.isArray(methods) ? methods : [...defaultMethods];
 }
 
 function setStoredMethods(methods) {
@@ -76,6 +102,124 @@ function syncPaymentUI() {
   renderMethods(previewList, methods, false);
 }
 
+function getOrders() {
+  const stored = localStorage.getItem(EMPLOYEE_ORDERS_KEY);
+  if (!stored) {
+    localStorage.setItem(EMPLOYEE_ORDERS_KEY, JSON.stringify(defaultOrders));
+    return [...defaultOrders];
+  }
+  const parsed = safeParse(stored, defaultOrders);
+  return Array.isArray(parsed) ? parsed : [...defaultOrders];
+}
+
+function setOrders(orders) {
+  localStorage.setItem(EMPLOYEE_ORDERS_KEY, JSON.stringify(orders));
+}
+
+function getMailLog() {
+  const stored = localStorage.getItem(EMPLOYEE_MAIL_LOG_KEY);
+  const parsed = safeParse(stored, []);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
+function setMailLog(entries) {
+  localStorage.setItem(EMPLOYEE_MAIL_LOG_KEY, JSON.stringify(entries));
+}
+
+function isEmployeeLoggedIn() {
+  return localStorage.getItem(EMPLOYEE_AUTH_KEY) === 'true';
+}
+
+function setEmployeeAuth(value) {
+  localStorage.setItem(EMPLOYEE_AUTH_KEY, value ? 'true' : 'false');
+}
+
+function appendMailLog(order) {
+  const log = getMailLog();
+  const timestamp = new Date().toLocaleString('da-DK');
+  log.unshift(`${timestamp} · Mail sendt for ${order.id} til ${order.email}`);
+  setMailLog(log.slice(0, 20));
+}
+
+function renderMailLog() {
+  if (!employeeMailLog) return;
+  const log = getMailLog();
+  employeeMailLog.innerHTML = '';
+
+  if (!log.length) {
+    const item = document.createElement('li');
+    item.className = 'method-item';
+    item.textContent = 'Ingen mails sendt endnu.';
+    employeeMailLog.appendChild(item);
+    return;
+  }
+
+  log.forEach((entry) => {
+    const item = document.createElement('li');
+    item.className = 'method-item';
+    item.textContent = entry;
+    employeeMailLog.appendChild(item);
+  });
+}
+
+function sendOrderMail(orderId) {
+  const orders = getOrders();
+  const idx = orders.findIndex((o) => o.id === orderId);
+  if (idx === -1) return;
+
+  orders[idx].emailed = true;
+  setOrders(orders);
+  appendMailLog(orders[idx]);
+
+  if (employeeMailStatus) {
+    employeeMailStatus.textContent = `Mail sendt for ordre ${orders[idx].id}.`;
+  }
+
+  renderOrders();
+  renderMailLog();
+}
+
+function renderOrders() {
+  if (!employeeOrdersBody) return;
+  const orders = getOrders();
+  employeeOrdersBody.innerHTML = '';
+
+  orders.forEach((order) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${order.id}</td>
+      <td>${order.customer}</td>
+      <td>${order.total}</td>
+      <td>${order.status}</td>
+      <td>
+        <button class="remove-btn" type="button" data-order-mail="${order.id}" ${order.emailed ? 'disabled' : ''}>
+          ${order.emailed ? 'Sendt' : 'Send mail'}
+        </button>
+      </td>
+    `;
+    employeeOrdersBody.appendChild(row);
+  });
+
+  employeeOrdersBody.querySelectorAll('[data-order-mail]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const orderId = button.getAttribute('data-order-mail');
+      if (orderId) sendOrderMail(orderId);
+    });
+  });
+}
+
+function updateEmployeeVisibility() {
+  if (!employeeLoginCard || !employeeDashboard) return;
+  const loggedIn = isEmployeeLoggedIn();
+  employeeLoginCard.classList.toggle('hidden', loggedIn);
+  employeeDashboard.classList.toggle('hidden', !loggedIn);
+
+  if (loggedIn) {
+    renderOrders();
+    renderMailLog();
+  }
+}
+
 yearElements.forEach((el) => {
   el.textContent = String(new Date().getFullYear());
 });
@@ -89,7 +233,6 @@ if (sendButton && statusElement) {
 if (paymentForm && paymentNameInput) {
   paymentForm.addEventListener('submit', () => {
     const methodName = paymentNameInput.value.trim();
-
     if (!methodName) {
       if (paymentStatus) paymentStatus.textContent = 'Skriv et navn på betalingsmetoden.';
       return;
@@ -104,4 +247,38 @@ if (paymentForm && paymentNameInput) {
   });
 }
 
+if (employeeLoginForm && employeeEmail && employeePassword) {
+  employeeLoginForm.addEventListener('submit', () => {
+    const email = employeeEmail.value.trim().toLowerCase();
+    const password = employeePassword.value;
+
+    if (email === DEMO_EMPLOYEE_EMAIL && password === DEMO_EMPLOYEE_PASSWORD) {
+      setEmployeeAuth(true);
+      employeeLoginStatus.textContent = 'Login lykkedes.';
+      updateEmployeeVisibility();
+    } else {
+      employeeLoginStatus.textContent = 'Forkert login. Prøv igen.';
+    }
+  });
+}
+
+if (sendAllOrderMailsBtn) {
+  sendAllOrderMailsBtn.addEventListener('click', () => {
+    const unsent = getOrders().filter((order) => !order.emailed);
+    unsent.forEach((order) => sendOrderMail(order.id));
+    if (!unsent.length && employeeMailStatus) {
+      employeeMailStatus.textContent = 'Alle ordremails er allerede sendt.';
+    }
+  });
+}
+
+if (employeeLogoutBtn) {
+  employeeLogoutBtn.addEventListener('click', () => {
+    setEmployeeAuth(false);
+    if (employeeLoginStatus) employeeLoginStatus.textContent = '';
+    updateEmployeeVisibility();
+  });
+}
+
 syncPaymentUI();
+updateEmployeeVisibility();

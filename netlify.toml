@@ -26,6 +26,11 @@
   to = "/betalinger.html"
   status = 200
 
+[[redirects]]
+  from = "/medarbejder"
+  to = "/medarbejder.html"
+  status = 200
+
 
 [[redirects]]
   from = "/handelsbetingelser"

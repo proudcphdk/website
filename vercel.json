@@ -36,6 +36,10 @@
     {
       "source": "/retur",
       "destination": "/retur.html"
+    },
+    {
+      "source": "/medarbejder",
+      "destination": "/medarbejder.html"
     }
   ],
   "headers": [

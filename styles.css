@@ -254,3 +254,38 @@ textarea {
 .legal p {
   margin-top: 0.4rem;
 }
+
+.hidden {
+  display: none;
+}
+
+.dashboard-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.6rem;
+}
+
+.order-table th,
+.order-table td {
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  padding: 0.7rem 0.4rem;
+  white-space: nowrap;
+}
+
+.dashboard-actions {
+  margin: 0.9rem 0;
+  display: grid;
+  gap: 0.5rem;
+}

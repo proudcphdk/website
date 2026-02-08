@@ -9,6 +9,7 @@ Denne hjemmeside er gjort **klar til hosting** som statisk site.
 - `om-os.html`
 - `kontakt.html`
 - `betalinger.html`
+- `medarbejder.html`
 - `styles.css`
 - `script.js`
 - `404.html`
@@ -64,3 +65,9 @@ python3 -m http.server 4173
 - Tilpas indholdet i `handelsbetingelser.html`, `privatlivspolitik.html` og `retur.html` til jeres juridiske setup.
 - Erstat demo-tekster/produkter med rigtige produkter.
 - Tilføj rigtig checkout/payment backend (nuværende betalingsmodul er frontend-demo via localStorage).
+
+
+## Medarbejderportal (demo)
+- URL: `/medarbejder` eller `/medarbejder.html`
+- Demo-login: `staff@proudcph.com` / `Proud2026!`
+- Portalen viser ordrer og simulerer udsendelse af ordremails via et internt mail-log i browseren.
