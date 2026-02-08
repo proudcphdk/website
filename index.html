@@ -3,58 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nordic Wear Commerce</title>
+    <title>Proud Cph | Premium Streetwear Platform</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="hero">
+    <header class="hero hero-image">
       <nav class="nav">
-        <a class="logo" href="index.html">Nordic Wear</a>
+        <a class="logo" href="index.html">Proud Cph</a>
         <div class="nav-actions">
-          <a class="btn btn-ghost" href="funktioner.html">Funktioner</a>
-          <a class="btn btn-ghost" href="om-os.html">Om os</a>
-          <a class="btn btn-small" href="kontakt.html">Kontakt</a>
+          <a class="nav-link" href="shop.html">Shop</a>
+          <a class="nav-link" href="funktioner.html">Funktioner</a>
+          <a class="nav-link" href="om-os.html">Brand</a>
+          <a class="btn btn-small btn-light" href="kontakt.html">Kontakt</a>
         </div>
       </nav>
 
       <div class="hero-content">
-        <p class="tag">Webshop-platform til tøjvirksomheder</p>
-        <h1>Byg en stærk modeforretning med en skalerbar webshop.</h1>
+        <p class="eyebrow">Copenhagen streetwear • premium commerce</p>
+        <h1>Byg et brand-univers, der føles lige så stærkt som Supreme og Stone Island.</h1>
         <p>
-          Nordic Wear Commerce samler salg, lager, fragt og kundeoplevelser i én løsning,
-          så dit team kan arbejde hurtigere og mere effektivt.
+          Proud Cph kombinerer eksklusivt visuelt design med stærke ecommerce-funktioner:
+          popup kampagner, lagerstyring, filtersystem, abandoned cart flows og avanceret checkout.
         </p>
         <div class="hero-cta">
-          <a class="btn" href="funktioner.html">Se funktioner</a>
-          <button class="btn btn-outline" id="openPopup" type="button">Vis popup-demo</button>
+          <a class="btn btn-light" href="shop.html">Se kollektionen</a>
+          <a class="btn btn-outline" href="betalinger.html">Administrér betalinger</a>
         </div>
       </div>
     </header>
 
     <main>
       <section class="section">
-        <h2>Hvorfor vælge Nordic Wear?</h2>
-        <div class="cards">
-          <article class="card"><h3>Fokus på fashion</h3><p>Løsningen er bygget til tøjbrands og deres arbejdsgange.</p></article>
-          <article class="card"><h3>Flersidet website</h3><p>Du får en professionel side med separate sider til indhold og support.</p></article>
-          <article class="card"><h3>Klar til vækst</h3><p>Automatiser opgaver og skab bedre kundeoplevelser i hele købsrejsen.</p></article>
+        <div class="section-heading">
+          <p class="eyebrow dark">Built for fashion operators</p>
+          <h2>Alt i én løsning til Proud Cph</h2>
+        </div>
+        <div class="cards three-up">
+          <article class="card feature">
+            <h3>Drop-ready storefront</h3>
+            <p>Stærk visuel butik med tydelig storytelling, produktfokus og hurtig mobiloplevelse.</p>
+          </article>
+          <article class="card feature">
+            <h3>Smart drift</h3>
+            <p>Styr lager, fragt, relaterede produkter, produktfiltrering og kundekonti fra ét sted.</p>
+          </article>
+          <article class="card feature">
+            <h3>Konverteringsflow</h3>
+            <p>Aktivér popup-kampagner og automatiser e-mails til forladte indkøbskurve.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow dark">Checkout stack</p>
+          <h2>Indbygget modul til betalingsmetoder</h2>
+          <p>
+            Tilføj selv betalingsmetoder som kort, MobilePay, Klarna eller PayPal via admin-siden.
+            De vises automatisk i checkout-sektionen på shoppen.
+          </p>
+          <a class="btn btn-dark" href="betalinger.html">Gå til betalingsmodul</a>
+        </div>
+        <div class="card payment-preview">
+          <h3>Aktive betalingsmetoder</h3>
+          <ul id="paymentMethodsPreview" class="method-list"></ul>
+          <p class="muted">Tip: Brug siden “Betalinger” til at tilføje/fjerne metoder.</p>
         </div>
       </section>
     </main>
 
-    <footer>
-      <p>© <span id="year"></span> Nordic Wear Commerce · Bygget til modebranchen</p>
+    <footer class="footer">
+      <p>© <span id="year"></span> Proud Cph • Copenhagen</p>
     </footer>
-
-    <div class="modal" id="promoModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
-      <div class="modal-content">
-        <button class="close" id="closePopup" aria-label="Luk popup">×</button>
-        <p class="modal-tag">Popup-eksempel</p>
-        <h3 id="modalTitle">Få 15% på første ordre</h3>
-        <p>Sådan kan en kampagne-popup se ud for nye besøgende i din tøjwebshop.</p>
-        <button class="btn" id="popupCta" type="button">Aktivér popup-flow</button>
-      </div>
-    </div>
 
     <script src="script.js"></script>
   </body>

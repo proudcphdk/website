@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kontakt | Proud Cph</title>
+    <title>Betalingsmetoder | Proud Cph</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -13,25 +13,29 @@
         <div class="nav-actions">
           <a class="nav-link dark" href="shop.html">Shop</a>
           <a class="nav-link dark" href="funktioner.html">Funktioner</a>
-          <a class="nav-link dark" href="betalinger.html">Betalinger</a>
+          <a class="nav-link dark" href="om-os.html">Brand</a>
           <a class="btn btn-small btn-dark" href="kontakt.html">Kontakt</a>
         </div>
       </nav>
       <div class="sub-hero-content">
-        <h1>Lad os bygge Proud Cphs næste store drop</h1>
-        <p>Book en gennemgang af webshop, marketing flows og checkout setup.</p>
+        <h1>Administrér betalingsmetoder</h1>
+        <p>Tilføj betalingsmetoder som vises direkte i checkout.</p>
       </div>
     </header>
 
-    <main class="section">
+    <main class="section split">
       <section class="card">
-        <form class="contact-form" onsubmit="return false;">
-          <input type="text" id="name" placeholder="Dit navn" required />
-          <input type="email" id="email" placeholder="Din e-mail" required />
-          <textarea id="message" rows="5" placeholder="Hvad vil du have hjælp til?"></textarea>
-          <button class="btn btn-dark" type="submit" id="sendBtn">Send besked</button>
-          <p class="status" id="status"></p>
+        <h2>Tilføj metode</h2>
+        <form id="paymentForm" class="contact-form" onsubmit="return false;">
+          <input id="paymentName" type="text" placeholder="Fx MobilePay" required />
+          <button id="addPaymentBtn" class="btn btn-dark" type="submit">Tilføj betalingsmetode</button>
+          <p class="status" id="paymentStatus"></p>
         </form>
+      </section>
+
+      <section class="card">
+        <h2>Aktive metoder</h2>
+        <ul id="paymentMethodsAdmin" class="method-list"></ul>
       </section>
     </main>
 
